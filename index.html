@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Regent Technologies</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: #0a0a0a;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-20px) translateX(10px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.3; filter: brightness(1); }
+            50% { opacity: 0.8; filter: brightness(1.3); }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes ferro-float {
+            0% {
+                bottom: -100px;
+                opacity: 0.6;
+                transform: translateX(0) scaleX(1) scaleY(0.8);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateX(30px) scaleX(0.9) scaleY(1.1);
+            }
+            100% {
+                bottom: 110%;
+                opacity: 0;
+                transform: translateX(-20px) scaleX(1.1) scaleY(0.7);
+            }
+        }
+
+        .ferro-bubble {
+            position: fixed;
+            bottom: -50px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(217, 70, 239, 0.6), rgba(168, 85, 247, 0.3));
+            filter: blur(1px);
+            pointer-events: none;
+            z-index: 1;
+            box-shadow: inset -2px -2px 8px rgba(0, 0, 0, 0.4), 0 4px 12px rgba(217, 70, 239, 0.4);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 122, 255, 0.02) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(52, 199, 89, 0.02) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(0, 0, 0, 0.01) 0%, transparent 50%);
+            animation: rotate 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 122, 255, 0.02) 0%, transparent 40%),
+                radial-gradient(circle at 90% 10%, rgba(52, 199, 89, 0.02) 0%, transparent 40%),
+                radial-gradient(circle at 50% 90%, rgba(255, 159, 64, 0.01) 0%, transparent 40%);
+            animation: pulse-glow 8s ease-in-out infinite, shimmer 4s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        header {
+            background: rgba(15, 15, 30, 0.8);
+            backdrop-filter: blur(20px);
+            color: #ffffff;
+            border-bottom: 1px solid rgba(217, 70, 239, 0.4);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(217, 70, 239, 0.3);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(135deg, #007aff 0%, #0051d5 100%);
+            border-radius: 6px;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 122, 255, 0.3);
+        }
+        
+        nav a:hover {
+            background: linear-gradient(135deg, #0051d5 0%, #003a9e 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 122, 255, 0.5);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #000000 0%, #0a0a1a 100%);
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(217, 70, 239, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #d946ef, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(217, 70, 239, 0.3);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #d946ef, #a855f7);
+            color: #0a0e27;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(217, 70, 239, 0.4);
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn:hover {
+            box-shadow: 0 0 40px rgba(217, 70, 239, 0.8), 0 0 60px rgba(168, 85, 247, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        .services {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+        
+        .services h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            color: #d946ef;
+            text-shadow: 0 0 20px rgba(217, 70, 239, 0.3);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 2rem;
+            border-radius: 8px;
+            color: #ffffff;
+            box-shadow: 0 8px 24px rgba(217, 70, 239, 0.15);
+            border: 1px solid rgba(217, 70, 239, 0.2);
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(217, 70, 239, 0.2);
+            color: white;
+            cursor: pointer;
+            position: relative;
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .service-card .basic-info {
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card.expanded .basic-info {
+            display: none;
+        }
+
+        .service-card .details-info {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .service-card.expanded .details-info {
+            display: block;
+            opacity: 1;
+        }
+
+        .service-card .details-info h4 {
+            color: #ffd700;
+            margin: 1rem 0 0.8rem 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .service-card .details-info ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .service-card .details-info li {
+            color: #e0e0e0;
+            margin: 0.4rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .service-card .details-info li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+            border-color: #e5e5ea;
+        }
+        
+        .service-card h3 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .service-card p {
+            color: #e0e0e0;
+            font-weight: 400;
+            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .highlights {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+        
+        .highlights h2 {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.2rem;
+            color: #d946ef;
+            text-shadow: 0 0 20px rgba(217, 70, 239, 0.3);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .highlight-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(217, 70, 239, 0.2);
+            padding: 2rem;
+            border-radius: 12px;
+            color: #ffffff;
+            box-shadow: 0 8px 24px rgba(217, 70, 239, 0.15);
+            text-align: left;
+            transition: all 0.3s;
+        }
+        
+        .highlight-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 28px rgba(217, 70, 239, 0.25);
+            border-color: rgba(217, 70, 239, 0.4);
+        }
+        
+        .highlight-card h3 {
+            color: #ffd700;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            text-align: left;
+        }
+        
+        .highlight-card p {
+            color: #e0e0e0;
+            font-weight: 400;
+            line-height: 1.6;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+        
+        .highlight-card .conditions {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .highlight-card .conditions li {
+            color: #d0d0d0;
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+            font-family: 'Inter', sans-serif;
+            text-align: left;
+        }
+        
+        .highlight-card .conditions li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-weight: bold;
+        }
+        
+        .about {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+        }
+        
+        .about h2 {
+            color: #000000;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: -0.5px;
+        }
+        
+        .about p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+            line-height: 1.8;
+            font-weight: 400;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.2px;
+        }
+        
+        .leadership {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .leadership h3 {
+            color: #000000;
+            margin-bottom: 2rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+        }
+        
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .leader-card {
+            background: rgba(217, 70, 239, 0.1);
+            border: 2px solid rgba(217, 70, 239, 0.4);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .leader-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(217, 70, 239, 0.2);
+            border-color: rgba(217, 70, 239, 0.6);
+            background: rgba(217, 70, 239, 0.15);
+        }
+        
+        .leader-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .leader-card h4 {
+            color: #000000;
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 0.5rem;
+        }
+        
+        .leader-card .position {
+            color: #d946ef;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+        
+        .leader-card p {
+            color: #555555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .contact {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 100%);
+            border-top: 1px solid rgba(217, 70, 239, 0.3);
+            border-bottom: 1px solid rgba(217, 70, 239, 0.3);
+        }
+        
+        .contact h2 {
+            color: #ffffff;
+            margin-bottom: 2rem;
+            font-size: 2.2rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: -0.5px;
+            text-align: center;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(217, 70, 239, 0.3);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 8px 32px rgba(217, 70, 239, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form:hover {
+            box-shadow: 0 12px 40px rgba(217, 70, 239, 0.3);
+            border-color: rgba(217, 70, 239, 0.5);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #e0e0e0;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(217, 70, 239, 0.3);
+            border-radius: 6px;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(217, 70, 239, 0.6);
+            box-shadow: 0 0 12px rgba(217, 70, 239, 0.2);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+        
+        .contact-form button {
+            width: 100%;
+            padding: 0.8rem;
+            background: linear-gradient(135deg, #d946ef 0%, #a855f7 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(217, 70, 239, 0.4);
+        }
+        
+        footer {
+            background: rgba(15, 15, 30, 0.9);
+            backdrop-filter: blur(20px);
+            color: #ffffff;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid rgba(217, 70, 239, 0.3);
+            box-shadow: none;
+        }
+        
+        footer p {
+            margin: 0.5rem 0;
+            color: #d0d0d0;
+            font-weight: 400;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Loading Screen Styles */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a0a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeOut 0.8s ease-out 2.2s forwards;
+            overflow: hidden;
+        }
+
+        /* Matrix background effect */
+        .loading-screen::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(90deg, 
+                    rgba(217, 70, 239, 0.02) 0%,
+                    rgba(168, 85, 247, 0.02) 25%,
+                    rgba(0, 212, 255, 0.02) 50%,
+                    rgba(255, 215, 0, 0.02) 75%,
+                    rgba(217, 70, 239, 0.02) 100%
+                );
+            animation: matrixShift 8s linear infinite;
+            pointer-events: none;
+        }
+
+        .loading-screen::after {
+            content: '01001000 01100101 01101100 01101100 01101111 01001000 01100101 01101100 01101100 01101111 01001000 01100101 01101100 01101100 01101111 01001000 01100101 01101100 01101100 01101111 01001000 01100101 01101100 01101100 01101111 01001000 01100101 01101100 01101100 01101111 01001000 01100101 01101100 01101100 01101111';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            color: #d946ef;
+            opacity: 0.08;
+            word-wrap: break-word;
+            white-space: pre-wrap;
+            animation: matrixFall 20s linear infinite;
+            text-shadow: 0 0 10px rgba(217, 70, 239, 0.3);
+            pointer-events: none;
+            line-height: 1.8;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        @keyframes matrixFall {
+            0% {
+                top: -100%;
+                opacity: 0.08;
+            }
+            50% {
+                opacity: 0.12;
+            }
+            100% {
+                top: 100%;
+                opacity: 0.08;
+            }
+        }
+
+        @keyframes matrixShift {
+            0% {
+                background-position: 0% 0%;
+            }
+            100% {
+                background-position: 100% 0%;
+            }
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+                visibility: visible;
+            }
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        .loader-container {
+            position: relative;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px;
+            z-index: 10;
+        }
+
+        .brand-text {
+            font-size: 3.5rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 1px;
+            background: linear-gradient(135deg, #d946ef, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(217, 70, 239, 0.3);
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid #d946ef;
+            animation: typewriter 1.2s steps(30, end) 1, blink 0.7s infinite 1.2s;
+        }
+
+        @keyframes typewriter {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            0%, 49% {
+                border-right-color: #d946ef;
+            }
+            50%, 100% {
+                border-right-color: transparent;
+            }
+        }
+
+        /* Mobile Responsive Loading Screen */
+        @media (max-width: 768px) {
+            .brand-text {
+                font-size: 2rem;
+                min-height: 50px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .brand-text {
+                font-size: 1.5rem;
+                min-height: 40px;
+                letter-spacing: 0.5px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 0.8rem;
+            }
+            
+            nav {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                gap: 0.3rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .hero {
+                padding: 2rem 0.8rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.6rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .hero p {
+                font-size: 0.95rem;
+                margin-bottom: 1rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
+            
+            .services {
+                padding: 1.5rem 0.8rem;
+            }
+            
+            .services h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .service-card {
+                padding: 1rem;
+            }
+            
+            .service-card h3 {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .service-card .details-info h4 {
+                font-size: 1rem;
+                margin: 0.8rem 0 0.5rem 0;
+            }
+
+            .service-card .details-info ul {
+                font-size: 0.85rem;
+            }
+            
+            .about {
+                padding: 1.5rem 0.8rem;
+            }
+            
+            .about h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .about p {
+                font-size: 0.95rem;
+                margin-bottom: 0.6rem;
+            }
+            
+            footer {
+                padding: 1rem 0.8rem;
+            }
+            
+            footer p {
+                font-size: 0.85rem;
+                margin: 0.3rem 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 0.8rem;
+            }
+            
+            .logo {
+                font-size: 1.2rem;
+                letter-spacing: 0.5px;
+            }
+            
+            nav a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .hero {
+                padding: 2rem 0.8rem;
+            }
+            
+            .hero h1 {
+                font-size: 1.5rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+            }
+            
+            .btn {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.85rem;
+            }
+            
+            .services {
+                padding: 1.5rem 0.8rem;
+            }
+            
+            .services h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .service-card {
+                padding: 1rem;
+            }
+            
+            .service-card h3 {
+                font-size: 1.1rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .service-card p {
+                font-size: 0.9rem;
+            }
+
+            .service-card .details-info h4 {
+                font-size: 0.95rem;
+                margin: 0.8rem 0 0.5rem 0;
+            }
+
+            .service-card .details-info ul {
+                font-size: 0.8rem;
+            }
+            
+            .about {
+                padding: 1.5rem 0.8rem;
+            }
+            
+            .about h2 {
+                font-size: 1.5rem;
+                margin-bottom: 1rem;
+            }
+            
+            .about p {
+                font-size: 0.95rem;
+                margin-bottom: 0.6rem;
+                line-height: 1.6;
+            }
+            
+            footer {
+                padding: 1rem 0.8rem;
+            }
+            
+            footer p {
+                font-size: 0.85rem;
+                margin: 0.3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader-container">
+            <div class="brand-text">Elite Regent Technologies</div>
+        </div>
+    </div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">Elite Regent Technologies</div>
+            <ul>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>Welcome to Elite Regent Technologies</h1>
+            <p>Innovative solutions for your digital future</p>
+            <p style="font-size: 1.5rem; color: #ffd700; font-weight: bold; margin: 1rem 0;">FREE Consulting & FREE Website Development</p>
+            <a href="#contact" class="btn">Get Started</a>
+        </div>
+    </section>
+    
+    <section class="hero-secondary">
+        <div class="container">
+            <h2>Why Choose Us</h2>
+            <p>We combine innovation, expertise, and customer focus to deliver exceptional technology solutions that drive real business results.</p>
+            <p style="font-size: 1.1rem; margin-top: 1.5rem; line-height: 1.8; color: #ffd700; font-weight: 600;">All of our services are priced significantly lower than market rates, enabling your business to succeed and grow. We believe in making premium technology solutions accessible and affordable so you can invest in your success without breaking the bank. Quality technology shouldn't cost a fortune.</p>
+        </div>
+    </section>
+    
+    <section class="services" id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="services-grid">
+                <div class="service-card" onclick="toggleService(this)">
+                    <div class="basic-info">
+                        <h3>Web Development</h3>
+                        <p>Cutting-edge web solutions designed to elevate your business and engage your audience.</p>
+                        <p style="color: #ffd700; font-weight: bold; margin-top: 0.5rem;">FREE Website Development Available</p>
+                    </div>
+                    <div class="details-info">
+                        <h3>Web Development</h3>
+                        <h4>What We Offer:</h4>
+                        <ul>
+                            <li>Responsive Design</li>
+                            <li>SEO Optimization</li>
+                            <li>E-commerce Solutions</li>
+                            <li>Fast Performance</li>
+                            <li>Security Features</li>
+                            <li>CMS Integration</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="service-card" onclick="toggleService(this)">
+                    <div class="basic-info">
+                        <h3>Software Solutions</h3>
+                        <p>Custom software tailored to your unique business requirements and goals.</p>
+                    </div>
+                    <div class="details-info">
+                        <h3>Software Solutions</h3>
+                        <h4>What We Offer:</h4>
+                        <ul>
+                            <li>Custom Development</li>
+                            <li>Mobile Apps</li>
+                            <li>Desktop Applications</li>
+                            <li>Integration Services</li>
+                            <li>Testing & QA</li>
+                            <li>Maintenance Support</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="service-card" onclick="toggleService(this)">
+                    <div class="basic-info">
+                        <h3>Security Systems and Monitoring</h3>
+                        <p>We provide security for your data and property with comprehensive security systems and monitoring solutions.</p>
+                    </div>
+                    <div class="details-info">
+                        <h3>Security & Monitoring</h3>
+                        <h4>What We Offer:</h4>
+                        <ul>
+                            <li>Data Encryption</li>
+                            <li>24/7 Monitoring</li>
+                            <li>Threat Detection</li>
+                            <li>Access Control</li>
+                            <li>Compliance Standards</li>
+                            <li>Incident Response</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="service-card" onclick="toggleService(this)">
+                    <div class="basic-info">
+                        <h3>Data Analytics</h3>
+                        <p>Transform your data into actionable insights with our advanced analytics platform.</p>
+                    </div>
+                    <div class="details-info">
+                        <h3>Data Analytics</h3>
+                        <h4>What We Offer:</h4>
+                        <ul>
+                            <li>Business Intelligence</li>
+                            <li>Data Visualization</li>
+                            <li>Predictive Analytics</li>
+                            <li>Real-time Dashboards</li>
+                            <li>Custom Reports</li>
+                            <li>Data Strategy</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="service-card" onclick="toggleService(this)">
+                    <div class="basic-info">
+                        <h3>Cloud Services</h3>
+                        <p>Scalable and reliable cloud infrastructure for modern enterprises.</p>
+                    </div>
+                    <div class="details-info">
+                        <h3>Cloud Services</h3>
+                        <h4>What We Offer:</h4>
+                        <ul>
+                            <li>Cloud Migration</li>
+                            <li>AWS Solutions</li>
+                            <li>Infrastructure as Code</li>
+                            <li>Auto-scaling Setup</li>
+                            <li>Backup & Recovery</li>
+                            <li>Cost Optimization</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="service-card" onclick="toggleService(this)">
+                    <div class="basic-info">
+                        <h3>Consulting</h3>
+                        <p>Expert guidance to optimize your technology strategy and digital transformation.</p>
+                        <p style="color: #ffd700; font-weight: bold; margin-top: 0.5rem;">FREE Consulting Services</p>
+                    </div>
+                    <div class="details-info">
+                        <h3>Consulting</h3>
+                        <h4>What We Offer:</h4>
+                        <ul>
+                            <li>Strategy Planning</li>
+                            <li>Digital Transformation</li>
+                            <li>Technology Assessment</li>
+                            <li>Process Optimization</li>
+                            <li>Change Management</li>
+                            <li>Team Training</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="highlights" id="highlights">
+        <div class="container">
+            <h2>Special Offers & Conditions</h2>
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <div class="highlight-icon"></div>
+                    <h3>FREE Consulting</h3>
+                    <p>Get expert advice on your digital strategy, technology roadmap, and business transformation initiatives - completely free!</p>
+                    <ul class="conditions">
+                        <li>Strategy & Planning Sessions</li>
+                        <li>Technology Assessment</li>
+                        <li>Digital Transformation Guidance</li>
+                    </ul>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon"></div>
+                    <h3>FREE Website Development</h3>
+                    <p>Launch your online presence with a professionally designed website at no cost.</p>
+                    <ul class="conditions">
+                        <li>Responsive Design</li>
+                        <li>Basic SEO Optimization</li>
+                        <li>Security Features Included</li>
+                    </ul>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-icon"></div>
+                    <h3>Software Solutions</h3>
+                    <p>Custom software development tailored to your business needs.</p>
+                    <ul class="conditions">
+                        <li><strong>Conditions Applied:</strong></li>
+                        <li>Minimum project scope required</li>
+                        <li>Flexible pricing & licensing</li>
+                        <li>Ongoing support available</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<section class="contact" id="contact">
+    <div class="container">
+        <h2>Contact Us</h2>
+        <!-- Formspree endpoint linked below -->
+        <form class="contact-form" action="https://formspree.io/f/xrevkdeb" method="POST">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone">
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+            </div>
+            <button type="submit">Send Message</button>
+        </form>
+    </div>
+</section>
+    
+    <section class="about" id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Elite Regent Technologies is a leading provider of innovative digital solutions. With years of expertise in web development, software engineering, and technology consulting, we empower businesses to succeed in the digital landscape.</p>
+            <p>Our team of dedicated professionals is committed to delivering excellence, reliability, and cutting-edge technology solutions that drive growth and transformation for our clients worldwide.</p>
+            
+            <div class="leadership">
+                <h3>Leadership Team</h3>
+                <div class="leadership-grid">
+                    <div class="leader-card">
+                        <img src="MI.png" alt="Mohammad Islam - Founder" />
+                        <h4>Mohammad Islam</h4>
+                        <div class="position">Founder</div>
+                        <p>Visionary leader with extensive experience in digital innovation and technology strategy. Passionate about building transformative solutions that drive business success.</p>
+                    </div>
+                    <div class="leader-card">
+                        <img src="EW.png" alt="Esha Wahid - Co-Founder" />
+                        <h4>Esha Wahid</h4>
+                        <div class="position">Co-Founder</div>
+                        <p>Strategic partner with deep expertise in software development and client relations. Dedicated to delivering exceptional value and fostering long-term partnerships.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Elite Regent Technologies. All rights reserved.</p>
+            <p>www.eliteregent.com</p>
+            <p>Contact us for more information about our services.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hide loading screen when page is fully loaded
+        window.addEventListener('load', function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen) {
+                // The CSS animation will handle the fade out, this just ensures it's removed from DOM
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        // Also hide it if it takes too long (safety net)
+        setTimeout(function() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            if (loadingScreen) {
+                loadingScreen.style.display = 'none';
+            }
+        }, 5000);
+
+        // Service card toggle functionality
+        function toggleService(element) {
+            // Close other expanded cards
+            const allCards = document.querySelectorAll('.service-card');
+            allCards.forEach(card => {
+                if (card !== element && card.classList.contains('expanded')) {
+                    card.classList.remove('expanded');
+                }
+            });
+            
+            // Toggle the clicked card
+            element.classList.toggle('expanded');
+        }
+
+        // Close service card when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.service-card')) {
+                document.querySelectorAll('.service-card.expanded').forEach(card => {
+                    card.classList.remove('expanded');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
